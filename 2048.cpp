@@ -38,6 +38,15 @@ void ArrayMaking(int array[][4]) {// declaring array(2d)//a,array willl represen
           array[i][j] = 0;// sets the value of the element at that position to 0 //setting value instead of memmory
             }}
     }}
+    
+//gloabal vaiable to use in some functions 
+int score = 0;
+int highScore = 0;
+void printScore(int a[][4]){//to print the score counter every time 
+
+    cout << "Score: " << score << endl;
+    cout<<"High Score: " << highScore << endl;
+}
 void print(int a[][4]) {
 	
     for (int i = 0; i < 4; i++) { //itterate through each row 
@@ -54,8 +63,10 @@ void print(int a[][4]) {
         cout << "|" << endl;// printing closing for the row in which you r
     }
     cout << "|------|------|------|------|" << endl << endl; //printing ending line
+    cout<<"press Ecs to go back "<<endl;
+    cout <<endl;
+    printScore(a);
 }
-
 void moveupwords(int a[][4]) // function to move up the elements 
 {
   int row, col, up, s; //s(store the curr element ), up (element above it )
@@ -71,6 +82,7 @@ void moveupwords(int a[][4]) // function to move up the elements
         }
         if (up >= 0 && a[up][col] == s) { // check if both box have same num
          a[up][col] += s; // add both num 
+         score +=2;
 		 a[row][col] = 0;	// set box to empty
         }} }}}
 void movedownwords(int a[][4]) {
@@ -85,7 +97,8 @@ void movedownwords(int a[][4]) {
           a[d-1][col] = 0;// set box to empty
           d=d+1;//move next
         }if (d <= 3 && a[d][col] == s) { // check if both box have same num
-          a[d][col] += s; // add them 
+          a[d][col] += s; // add them
+          score +=2;
           a[row][col] = 0;	// set box to empty
         }}}}}
 void moveleft(int a[][4]){
@@ -102,6 +115,7 @@ void moveleft(int a[][4]){
                 }
                 if (l >= 0 && a[row][l] == s) { // check if both box have same num
                     a[row][l] += s;  // add them 
+                    score +=2;
                     a[row][col] = 0;// set box to empty
                  }}}}}
 void moveright(int a[][4]){
@@ -118,6 +132,7 @@ void moveright(int a[][4]){
         }
         if (r < 4 && a[row][r] == s) { 
           a[row][r] += s;
+          score +=2;
           a[row][col] = 0;
            }}}}}
 void movement(int a[][4])
@@ -282,10 +297,66 @@ void menu(){
   }
 	
 }
+
+
+int points;
+// Function to update the score
+void updateScore() {
+  score += points;
+  if (score > highScore) {
+    highScore = score;
+  }
+}
+// Function to reset the score
+void resetScore() {
+  score = 0;
+}
+
+
+void play() {
+  cout <<endl<< "enter to reset the score and display the high score "<<endl;
+  game();
+  
+  int score ;
+  int highScore;
+  updateScore();
+  resetScore() ;
+  
+  int p;
+	cout << "Enter 1 to return to menu or 2 to play again: ";
+      cin >> p;
+
+      while (p < 1 || p> 2) {
+        cout << "Invalid input! Enter 1 to return to menu or 2 to play again: ";
+        cin >> p;
+      }
+      while (!cin >> p) {//to fix bugs 
+   		cin.clear();
+    	cin.ignore(INT_MAX, '\n');
+
+      }
+      if (p== 2) {
+         score=0;
+      	 play(); // Play again
+      	
+      } else {
+      	cout <<endl<< "returning to menu................." << endl;
+      	
+      	score=0;
+        menu(); 
+        play();
+    }
+        }
 int main(){  
 
-   menu();
-   game();
+  menu();
+  game();
+   
+  int score ;
+  int highScore;
+  updateScore();
+  resetScore() ;
+ 
    int p;
 	cout << "Enter 1 to return to menu or 2 to play again: ";
       cin >> p;
@@ -293,5 +364,20 @@ int main(){
         cout << "Invalid input! Enter 1 to return to menu or 2 to play again: ";
         cin >> p;
       }
+      while (!cin >>p) {//to fix bugs 
+    	  cin.clear();
+    	  cin.ignore(INT_MAX, '\n');
+}
+      if (p== 2) {
+        score = 0;
+        play(); // Play again
+      
+      } if (p==1) {
+      	cout <<endl<< "returning to menu................." << endl;
+      	score=0;
+        menu(); 
+        play();
+    }
+        
    return 0;
 }
