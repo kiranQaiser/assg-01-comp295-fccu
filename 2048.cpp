@@ -47,7 +47,7 @@ void print(int a[][4]) {
                 cout << "| ";
                 
 				                  // or print that number
-                cout << a[i][j];
+                 printf("%4d  ", a[i][j]);//// and print the value with a padding of 4 spaces
                 cout << " ";
             }
         }
@@ -188,7 +188,9 @@ void game() {
   int array[4][4];
   ArrayMaking(array);
   print(array);
+  
   getch();  // function waits for a key to be pressed and then returns the ASCII code of the character that was pressed
+  system("cls");
   int a1, a2, a3, a4, r, c;
   int a[4][4] = {0}, temp[4][4] = {0};  // initialize all elements to 0
   a1 = rand() % 4;
@@ -209,6 +211,7 @@ void game() {
       for (c = 0; c < 4; c++)  // iterate over col
         temp[r][c] = a[r][c];  // copy num
     character = getch();  // assign the value to character
+    system("cls");
     switch (character) {
       case 72:  // up arrow
         moveupwords(a);
@@ -239,8 +242,6 @@ void game() {
     }
   }
 }
-
-
 void menu(){
   cout << "Welcome to 2048 game!" << endl;
   cout << "1. Start" << endl;
