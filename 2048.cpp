@@ -63,9 +63,11 @@ void print(int a[][4]) {
         cout << "|" << endl;// printing closing for the row in which you r
     }
     cout << "|------|------|------|------|" << endl << endl; //printing ending line
-    cout<<"press Ecs to go back "<<endl;
+    cout<< endl<< "use arrow keys to play the game";
+    cout<<endl<<"press Ecs to go back "<<endl;
     cout <<endl;
     printScore(a);
+    
 }
 void moveupwords(int a[][4]) // function to move up the elements 
 {
@@ -82,7 +84,7 @@ void moveupwords(int a[][4]) // function to move up the elements
         }
         if (up >= 0 && a[up][col] == s) { // check if both box have same num
          a[up][col] += s; // add both num 
-         score +=2;
+         score +=a[up][col];
 		 a[row][col] = 0;	// set box to empty
         }} }}}
 void movedownwords(int a[][4]) {
@@ -98,7 +100,7 @@ void movedownwords(int a[][4]) {
           d=d+1;//move next
         }if (d <= 3 && a[d][col] == s) { // check if both box have same num
           a[d][col] += s; // add them
-          score +=2;
+          score +=a[d][col];
           a[row][col] = 0;	// set box to empty
         }}}}}
 void moveleft(int a[][4]){
@@ -115,7 +117,7 @@ void moveleft(int a[][4]){
                 }
                 if (l >= 0 && a[row][l] == s) { // check if both box have same num
                     a[row][l] += s;  // add them 
-                    score +=2;
+                    score +=a[row][l];
                     a[row][col] = 0;// set box to empty
                  }}}}}
 void moveright(int a[][4]){
@@ -132,7 +134,7 @@ void moveright(int a[][4]){
         }
         if (r < 4 && a[row][r] == s) { 
           a[row][r] += s;
-          score +=2;
+          score +=a[row][r];
           a[row][col] = 0;
            }}}}}
 void movement(int a[][4])
@@ -250,7 +252,11 @@ void game() {//add tiles function
     print(a);
 
     if (isGameOver(a)) {
-      cout << endl << endl << endl << "you lost the game " << endl << endl;
+    cout << endl << endl << endl << "you lost the game " << endl << endl;
+      
+    cout << "====================================" << endl;
+    cout << "            Game Over               " << endl;
+    cout << "====================================" << endl;
       cout << "  ..........press enter to continue.........to get other options  " << endl;
 
       getch();
@@ -283,9 +289,13 @@ void menu(){
       cout << "     GAME START '''''''play'''''''' " << endl;
       break;
     case 2:
-      cout << "Instructions for this game are :" << endl;
-      cout << "                                 arrow keys will be use to merge " << endl<<"                                 merge with the same number ";
-      cout<<endl<<                                      "you will score the addition of numbers for 1 merge ";
+      cout << endl<<"Instructions for this game are :" << endl<<endl;
+      cout<<endl<<"--------------------------------------------------------------------------------------------------";
+      cout <<endl<< "                                 arrow keys will be use to merge " ;
+      cout<<endl<<  "                                   merge with the same number ";
+      cout<<endl<<  "                                 you will score the addition of numbers for 1 merge ";
+      cout<< endl<< "                                 use arrow keys to play the game";
+      cout<<endl<<"--------------------------------------------------------------------------------------------------";
       exit(0);
     case 3:
       // Quit game
