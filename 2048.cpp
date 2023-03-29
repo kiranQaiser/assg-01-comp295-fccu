@@ -3,6 +3,7 @@
 #include <ctime>
 #include<conio.h>
 #include<climits>
+//#include<bits/stdc++.h>   // can use this instead of importing line by line to import all the liberaries 
 using namespace std;
 
 void ArrayMaking(int array[][4]) {// declaring array(2d)//a,array willl represent the grid 
