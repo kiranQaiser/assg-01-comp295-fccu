@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <ctime>
 #include<conio.h>
+#include<climits>
 using namespace std;
 
 void ArrayMaking(int array[][4]) {// declaring array(2d)//a,array willl represent the grid 
@@ -38,23 +39,21 @@ void ArrayMaking(int array[][4]) {// declaring array(2d)//a,array willl represen
             }}
     }}
 void print(int a[][4]) {
-    for (int i = 0; i < 4; i++) {//itterate through each row 
+	
+    for (int i = 0; i < 4; i++) { //itterate through each row 
         cout << "|------|------|------|------|" << endl;
         for (int j = 0; j < 4; j++) {// itterate through each col of the row at which u will be at that time 
             if (a[i][j] == 0) {// if current element is 0
                 cout << "|      "; //print empty box 
             } else {
-                cout << "| ";
-                
+                cout << "|";
 				                  // or print that number
-                 printf("%4d  ", a[i][j]);//// and print the value with a padding of 4 spaces
-                cout << " ";
+                printf("%4d  ", a[i][j]);//// and print the value with a padding of 4 spaces
             }
         }
         cout << "|" << endl;// printing closing for the row in which you r
     }
-    cout << "|------|------|------|------|" << endl;//printing ending line
-    cout << endl;
+    cout << "|------|------|------|------|" << endl << endl; //printing ending line
 }
 
 void moveupwords(int a[][4]) // function to move up the elements 
@@ -255,6 +254,11 @@ void menu(){
   while(selection < 1 || selection > 3) {
     cout << endl<<"wrong input" <<endl<< "Please select a valid option from 1 to 3: ";
     cin >> selection;
+  
+  while (!cin >> selection) {//to fix bugs 
+    cin.clear();
+    cin.ignore(INT_MAX, '\n');
+}
   }
   switch (selection) {
     case 1:
