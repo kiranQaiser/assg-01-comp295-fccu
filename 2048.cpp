@@ -120,7 +120,7 @@ void moveright(int a[][4]){
           a[row][r] += s;
           a[row][col] = 0;
            }}}}}
-void join(int a[][4])
+void movement(int a[][4])
 {
   int left,right,num;//variables will store the new random numbers 
   srand(time(0));//sets the seed value for the random number generator based on the current time.
@@ -183,7 +183,7 @@ bool check(const int temp[][4], const int a[][4])
     return true;
 }
 
-void game() {
+void game() {//add tiles function
   int array[4][4];
   ArrayMaking(array);
   print(array);
@@ -221,6 +221,8 @@ void game() {
       case 75:  // left arrow
         moveleft(a);
         break;
+      case 27:  // escape char to go back while playing the game
+        return;
       case 77:  // right arrow
         moveright(a);
         break;
@@ -229,7 +231,7 @@ void game() {
     }
 
     if (!check(temp, a))
-        join(a);
+        movement(a);
     print(a);
 
     if (isGameOver(a)) {
@@ -284,5 +286,12 @@ int main(){
 
    menu();
    game();
+   int p;
+	cout << "Enter 1 to return to menu or 2 to play again: ";
+      cin >> p;
+      while (p < 1 || p> 2) {
+        cout << "Invalid input! Enter 1 to return to menu or 2 to play again: ";
+        cin >> p;
+      }
    return 0;
 }
