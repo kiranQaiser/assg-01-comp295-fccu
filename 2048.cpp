@@ -141,22 +141,37 @@ void join(int a[][4])
 
 
 bool isGameOver(int a[][4]) {
+    bool emp_box = false; // flag for empty cell check
+    bool adj_box = false; // flag for adjacent matching element check
+    
     for (int i = 0; i < 4; i++) {//itterate over rows
         for (int j = 0; j < 4; j++) {//itterate over col
             if (a[i][j] == 0) { //check if array is empty
+                emp_box = true; // Set empty cell to true
             } else if (a[i][j] == 2048) {
                 return true; // If we have reached 2048, return true for game over
             }
         }
     }
     
-    for (int i = 0; i < 4; i++) {
-        for (int j = 0; j < 4; j++) {
+    for (int i = 0; i < 3; i++) {//itterate upto 2nd last row
+        for (int j = 0; j < 3; j++) { //itterate upto 2nd last col
             if (a[i][j] == a[i+1][j] || a[i][j] == a[i][j+1]) {
+                adj_box= true; // Set adjacent matching element  to true
             }
         }
     }
+    
+        // Check last row and column for adjacent matching elements
+    if (a[3][2] == a[3][3] || a[2][3] == a[3][3]) {
+        adj_box= true; // Set adjacent matching element flag to true
     }
+    
+    // Return true if no empty cells and no adjacent matching elements
+    if (!(emp_box|| adj_box)) {
+    return true;
+}
+}
 
 
 
@@ -183,6 +198,10 @@ void game() {
     a4 = rand() % 4;  // for a4
     if (a3 != a1 && a4 != a2) break;  // not equal
   }
+  
+  a[a1][a2] = 2;  // assign 2
+  a[a3][a4] = 4;  // assign 4
+  print(a);
 
   int character;
   while (1) {
