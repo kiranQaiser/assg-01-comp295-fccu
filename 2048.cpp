@@ -121,29 +121,43 @@ void moveright(int a[][4]){
           a[row][r] += s;
           a[row][col] = 0;
            }}}}}
+void join(int a[][4])
+{
+  int left,right,num;//variables will store the new random numbers 
+  srand(time(0));//sets the seed value for the random number generator based on the current time.
+  while(1)//while 
+  {
+    left=rand()%4;// random number will be generated from 0 to 3 which will be used as the index of the row for the new line 
+    right=rand()%4;
+    if(a[left][right]==0)// will check that box is empty or not 
+    {
+      num = (rand() % 2 + 1) * 2;//num is multiplyied with 2 to generate 2 or 4 
+      a[left][right] =num;
+      
+      break;
+    
+    }}}
+
 
 
 bool isGameOver(int a[][4]) {
-    for (int i = 0; i < 4; i++) {
-        for (int j = 0; j < 4; j++) {
-            if (a[i][j] == 0) {
+    for (int i = 0; i < 4; i++) {//itterate over rows
+        for (int j = 0; j < 4; j++) {//itterate over col
+            if (a[i][j] == 0) { //check if array is empty
             } else if (a[i][j] == 2048) {
                 return true; // If we have reached 2048, return true for game over
             }
         }
     }
     
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4; j++) {
             if (a[i][j] == a[i+1][j] || a[i][j] == a[i][j+1]) {
             }
         }
     }
-    // Check last row and column for adjacent matching elements
-    if (a[3][2] == a[3][3] || a[2][3] == a[3][3]) {
     }
 
-}
 
 
 bool check(const int temp[][4], const int a[][4])
@@ -194,6 +208,7 @@ void game() {
     }
 
     if (!check(temp, a))
+        join(a);
     print(a);
 
     if (isGameOver(a)) {
